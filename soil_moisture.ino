@@ -3,11 +3,11 @@
 #include <dht11.h>
 
 #define wifi_ssid "Soi13"
-#define wifi_password "!Lingua2020@#!$"
+#define wifi_password ""
 
 #define mqtt_server "10.0.0.4"
 #define mqtt_user "mqtt_user"
-#define mqtt_password "Lingua2023!"
+#define mqtt_password ""
 
 #define humidity_topic "homeassistant/sensor/humidity"
 #define temperature_topic "homeassistant/sensor/temperature"

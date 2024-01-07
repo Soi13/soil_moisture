@@ -1,2 +1,2 @@
-# Soil_moisture
- Measure soil moisture and transmit data to home assistant
+# Measuring soil moisture
+ Measure soil moisture, temperarure and humidity with ESP-8266-WiFi controller and transmit data to Home Assistant via MQTT protocol.

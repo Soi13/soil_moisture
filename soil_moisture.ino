@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include <dht11.h>
+#include <DHT11.h>
 
 #define wifi_ssid "Soi13"
 #define wifi_password ""
@@ -14,12 +14,16 @@
 #define soil_moisture_topic "homeassistant/sensor/soil_moisture"
 #define soil_moisture_condition_topic "homeassistant/sensor/soil_moisture_condition"
 #define soil_moisture_controller_topic "homeassistant/sensor/soil_moisture_state"
+#define soil_moisture_topic_flower_new "homeassistant/sensor/soil_moisture_flower_new"
+#define soil_moisture_condition_topic_flower_new "homeassistant/sensor/soil_moisture_condition_flower_new"
+#define soil_moisture_controller_topic_flower_new "homeassistant/sensor/soil_moisture_state_flower_new"
 
-#define sensorPower 5
+#define sensorPower 2 //D4 on ESP8266 board
+#define sensorPower 5 //D2 on ESP8266 board
 #define sensorPin A0
 
-#define DHTPIN  4
-dht11 DHT11;
+#define DHTPIN  4 //D2 on ESP8266 board
+DHT11 dht11(DHTPIN);
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -108,7 +112,7 @@ void loop() {
   }
   client.loop();
 
-  int chk = DHT11.read(DHTPIN);
+  //int chk = dht11(DHTPIN);
 
   long now = millis();
   if (now - lastMsg > 2000) {
@@ -118,8 +122,9 @@ void loop() {
     client.publish(soil_moisture_controller_topic, "1");
 
     //////////Temperature and humidity sensor
-    float newTemp = (float)DHT11.temperature;
-    float newHum = (float)DHT11.humidity;
+    float newTemp = (float)dht11.readTemperature();
+    float newHum = (float)dht11.readHumidity();
+
 
     if (checkBound(newTemp, temp, diff)) {
       temp = newTemp;

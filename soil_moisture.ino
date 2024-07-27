@@ -9,8 +9,8 @@
 #define mqtt_user "mqtt_user"
 #define mqtt_password ""
 
-#define humidity_topic "homeassistant/sensor/humidity"
-#define temperature_topic "homeassistant/sensor/temperature"
+//#define humidity_topic "homeassistant/sensor/humidity"
+//#define temperature_topic "homeassistant/sensor/temperature"
 #define soil_moisture_topic "homeassistant/sensor/soil_moisture"
 #define soil_moisture_condition_topic "homeassistant/sensor/soil_moisture_condition"
 #define soil_moisture_controller_topic "homeassistant/sensor/soil_moisture_state"
@@ -25,8 +25,8 @@
 #define sensorPower 5 //D1 on ESP8266 board
 #define sensorPin A0
 
-#define DHTPIN  4 //D2 on ESP8266 board
-DHT11 dht11(DHTPIN);
+//#define DHTPIN  4 //D2 on ESP8266 board
+//DHT11 dht11(DHTPIN);
 
 #define MUX_A 12 //D6 on ESP8266 board
 #define MUX_B 13 //D7 on ESP8266 board
@@ -36,8 +36,8 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 
 long lastMsg = 0;
-float temp = 0.0;
-float hum = 0.0;
+//float temp = 0.0;
+//float hum = 0.0;
 float diff = 1.0;
 float diff1 = 1.0;
 int soil_moisture = 0;
@@ -109,9 +109,9 @@ void reconnect() {
 }
 
 //Humidity and temperature
-bool checkBound(float newValue, float prevValue, float maxDiff) {
+/*bool checkBound(float newValue, float prevValue, float maxDiff) {
   return !isnan(newValue) && (newValue < prevValue - maxDiff || newValue > prevValue + maxDiff);
-}
+}*/
 
 //Soil moisture
 bool checkBoundSoil(float newVal, float prevVal, float maxDiff) {
@@ -155,7 +155,7 @@ void loop() {
     client.publish(soil_moisture_controller_topic, "1");
     client.publish(soil_moisture_controller_topic1, "1");
 
-    //////////Temperature and humidity sensor
+    /*//////////Temperature and humidity sensor
     float newTemp = (float)dht11.readTemperature();
     float newHum = (float)dht11.readHumidity();
 
@@ -173,7 +173,7 @@ void loop() {
       Serial.println(String(hum).c_str());
       client.publish(humidity_topic, String(hum).c_str(), true);
     }
-    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////*/
 
 
     ///////////Soil moisture sensors

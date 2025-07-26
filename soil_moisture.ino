@@ -5,7 +5,7 @@
 #define wifi_ssid "Soi13"
 #define wifi_password ""
 
-#define mqtt_server "10.0.0.4"
+#define mqtt_server "192.168.1.64"
 #define mqtt_user "mqtt_user"
 #define mqtt_password ""
 
